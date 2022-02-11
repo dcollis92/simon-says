@@ -99,4 +99,6 @@ div.btns {
   text-align: center;
   justify-content: center;
   padding: 20px;
+  height: 20px;
+  width: 40px;
 }
