@@ -35,12 +35,12 @@ PSEUDOCODE
     // X 2.2) gameStatus - to display the 3 different game states
 
 // 3) Upon loading, the game should:
-    // 3.1) init() - initialize the start of the game
-    // 3.2) Upon initialization, the function should:
-        // Initialize an empty array available to .push each new sequence addition
-        // initialize a 2nd empty array to .push the players created sequence
-        // initialize level = 1
-        // initialize isWinner = null (no level has been completed yet to track progress)
+    // X 3.1) init() - initialize the start of the game
+    // X 3.2) Upon initialization, the function should:
+        X // Initialize an empty array available to .push each new sequence addition
+        X // initialize a 2nd empty array to .push the players created sequence
+        X // initialize level = 0 (as the game hasn't started)
+        X // initialize isWinner = null (no level has been completed yet to track progress)
         // Allow the player to click a start button
         // render these variables with render()
 

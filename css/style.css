@@ -48,7 +48,7 @@ section.board {
   border: 3px solid black;
 }
 
-div.btn {
+div.btns {
   border: 3px solid black;
   font-size: 8vmin;
   display: flex;
@@ -90,4 +90,13 @@ div.btn {
 
 .hidden {
   display: none;
+}
+
+#reset-space {
+  display: flex;
+  flex-direction: column;
+  border: 4px solid black;
+  text-align: center;
+  justify-content: center;
+  padding: 20px;
 }

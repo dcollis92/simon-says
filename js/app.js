@@ -28,9 +28,9 @@ resetBtn.addEventListener('click', init)
 
 
 /*-------------------------- Functions --------------------------*/
-init()
+init() // PC 3.1
 
-function init() {
+function init() { 
   gameSequence = [] // PC 3.2
   playerSequence = [] // PC 3.2
   level = 0 // PC 3.2
