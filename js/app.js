@@ -1,10 +1,10 @@
 /*-------------------------- Constants --------------------------*/
-player = { // PC 0.1
+const player = { // PC 0.1
   name: 'Ready Player One',
   score: 0
 }
 
-buttons = ['red', 'green', 'yellow', 'blue'] // PC 0.2
+const buttons = ['red', 'green', 'yellow', 'blue'] // PC 0.2
 
 
 /*-------------------------- Variables --------------------------*/
@@ -21,7 +21,8 @@ const resetBtn = document.querySelector('#reset-button')
 
 
 /*----------------------- Event Listeners -----------------------*/
-sequenceArray.forEach(button => button.addEventListener('click', handleClick)) 
+sequenceArray.forEach(button => 
+  button.addEventListener('click', handleClick)) 
 
 resetBtn.addEventListener('click', init)
 
@@ -30,29 +31,46 @@ resetBtn.addEventListener('click', init)
 init()
 
 function init() {
-  let gameSequence = [''] // 3.2
-  let playerSequence = [''] // 3.2
-  level = 1 // PC 3.2
+  gameSequence = [] // PC 3.2
+  playerSequence = [] // PC 3.2
+  level = 0 // PC 3.2
   isWinner = null // PC 3.2
-
-
+  message = "Ready?"
+  // insert timer function
+  resetDiv.classList.add("hidden")
   render()
 }
 
 function render() {
-
+  gameStatus.textContent = message
 
 }
 
-function handleClick() {
+function tick() {
+  seconds++
+}
 
+function handleClick(event) {
+  
 
+  level += 1
+  getWinner() // 6.1
   render ()
 }
 
 function getWinner() {
+  if (gameSequence === playerSequence) {
+    message = 'Nice! Keep Going!'
+    // game continues
+  } else if (gameSequence === playerSequence && level > 15) {
+    isWinner = true
+    message = 'You Won! Play Again?'
+    confetti.start(2000)
+  } else if (gameSequence !== playerSequence) {
+    message = "D'oh! Try Again?"
+  }
 
-
+  resetDiv.classList.remove("hidden") // PC 7.3
   render ()
 }
 
