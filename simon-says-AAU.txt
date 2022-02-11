@@ -18,21 +18,21 @@ Easy / Medium / Hard??
 
 PSEUDOCODE
 // 0) Define the constants in the game play:
-    // 0.1) the player
-    // 0.2) the 4 buttons w/ their corresponding sound+color
+    // X 0.1) the player
+    // X 0.2) the 4 buttons w/ their corresponding sound+color
 
 // 1) Define the required variables tracking the game state:
     // 1.1) array to represent the 4 Buttons in the game.
         // [Red(1), Green(2), Yellow(3), Blue(4)]
-    // 1.2) a level variable to render the level increases.
-    // 1.3) an isWinner variable to represent 3 different game states:
+    // X 1.2) a level variable to render the level increases.
+    // X 1.3) an isWinner variable to represent 3 different game states:
         // the player has won
         // the player has lost at level #___
         // the game is still in play
 
 // 2) Store cached element references on the page that will be accessed throughout the game.
-    // 2.1) sequenceArray - to add each button to the randomized game sequence. 
-    // 2.2) gameStatus - to display the 3 different game states
+    // X 2.1) sequenceArray - to add each button to the randomized game sequence. 
+    // X 2.2) gameStatus - to display the 3 different game states
 
 // 3) Upon loading, the game should:
     // 3.1) init() - initialize the start of the game
