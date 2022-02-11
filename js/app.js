@@ -19,6 +19,7 @@ const resetBtn = document.querySelector('#reset-button')
 
 
 /*----------------------- Event Listeners -----------------------*/
+sequenceArray.forEach(button => button.addEventListener('click', handleClick)) 
 
 resetBtn.addEventListener('click', init)
 
@@ -28,17 +29,24 @@ init()
 
 function init() {
 
+
+  render()
 }
 
 function render() {
+
 
 }
 
 function handleClick() {
 
+
+  render ()
 }
 
 function getWinner() {
 
+
+  render ()
 }
 
