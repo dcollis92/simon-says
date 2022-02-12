@@ -21,10 +21,10 @@ const resetBtn = document.querySelector('#reset-button')
 
 
 /*----------------------- Event Listeners -----------------------*/
-sequenceArray.forEach(button => 
-  button.addEventListener('click', handleClick)) 
-
+startButton.addEventListener('click', handleClick)
+sequenceArray.forEach(button => button.addEventListener('click', handleClick)) 
 resetBtn.addEventListener('click', init)
+
 
 
 /*-------------------------- Functions --------------------------*/
@@ -36,6 +36,7 @@ function init() {
   level = 0 // PC 3.2
   isWinner = null // PC 3.2
   message = "Ready?"
+  display = 'Play'
   // insert timer function
   resetDiv.classList.add("hidden")
   render()
@@ -43,6 +44,7 @@ function init() {
 
 function render() {
   gameStatus.textContent = message
+  startButton.textContent = display
 
 }
 
@@ -51,12 +53,14 @@ function tick() {
 }
 
 function handleClick(event) {
-  
+  let gameSequence = buttons[Math.floor(Math.random()* buttons.length-1)]
 
   level += 1
+  display = level
   getWinner() // 6.1
   render ()
 }
+console.log(gameSequence)
 
 function getWinner() {
   if (gameSequence === playerSequence) {
