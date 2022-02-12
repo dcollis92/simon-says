@@ -46,11 +46,13 @@ function render() {
   gameStatus.textContent = message
   startButton.textContent = display
 
+  genSequence()
 }
 
 function genSequence() {
   let gameSequence = buttons[Math.floor(Math.random()* buttons.length-1)]
   
+
 }
 
 function tick() {
