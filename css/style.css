@@ -58,14 +58,14 @@ div.btns {
   margin: 4px;
 }
 
-#red {
-  background-color: red;
+#green {
+  background-color: green;
   grid-column: 1 / 4;
   grid-row: 1 / 4;
 }
 
-#green {
-  background-color: green;
+#red {
+  background-color: red;
   grid-column: 4 / 7;
   grid-row: 1 / 4;
 }

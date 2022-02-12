@@ -48,12 +48,16 @@ function render() {
 
 }
 
+function genSequence() {
+  let gameSequence = buttons[Math.floor(Math.random()* buttons.length-1)]
+  
+}
+
 function tick() {
   seconds++
 }
 
 function handleClick(event) {
-  let gameSequence = buttons[Math.floor(Math.random()* buttons.length-1)]
 
   level += 1
   display = level
