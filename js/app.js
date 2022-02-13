@@ -9,9 +9,9 @@ const buttons = ["green", "red", "yellow", "blue"]; // PC 0.2
 
 /*-------------------------- Variables --------------------------*/
 let level,
- // PC 1.2  
+  // PC 1.2
   isWinner,
-//  PC 1.3
+  //  PC 1.3
 
 /*------------------ Cached Element References ------------------*/
 sequenceArray = document.querySelectorAll(".board-btn"); // PC 2.1
@@ -23,8 +23,7 @@ const resetBtn = document.querySelector("#reset-button");
 /*----------------------- Event Listeners -----------------------*/
 startButton.addEventListener("click", startClick);
 sequenceArray.forEach((button) =>
-  button.addEventListener("click", handleClick)
-);
+  button.addEventListener("click", handleClick));
 resetBtn.addEventListener("click", init);
 
 /*-------------------------- Functions --------------------------*/
@@ -39,13 +38,13 @@ function init() {
   display = "Play";
   // insert timer function
   resetDiv.classList.add("hidden");
-
   render();
 }
 
 function render() {
   gameStatus.textContent = message;
   startButton.textContent = display;
+
 }
 
 function genSequence() {
@@ -54,15 +53,15 @@ function genSequence() {
 
 console.log("gs", gameSequence);
 
-function tick() {
-  seconds++;
-}
+// function tick() {
+//   seconds++;
+// }
 
 function startClick(event) {
   genSequence();
   level = 1;
   display = level;
-
+  resetDiv.classList.remove("hidden");
   render();
   console.log("gs", gameSequence);
 }
@@ -73,11 +72,11 @@ function handleClick(event) {
   for (let i = 0; i < gameSequence.length; i++) {
     console.log(i);
     if (playerSequence[i] === gameSequence[i]) {
-      level += 1;
-      display = level;
-      genSequence();
     }
   }
+  level += 1
+  display = level
+  genSequence()
   getWinner(); // 6.1
   render();
   console.log(event.target.id);
@@ -86,18 +85,27 @@ function handleClick(event) {
 }
 
 function getWinner() {
-  if (gameSequence === playerSequence) {
+  for (let i = 0; i < gameSequence.length; i++) {
+  if (gameSequence[i] === playerSequence[i]) {
     message = "Nice! Keep Going!";
     // game continues
-  } else if (gameSequence === playerSequence && level > 15) {
+  } else if (gameSequence[i] === playerSequence[i] && level > 15) {
     isWinner = true;
     message = "You Won! Play Again?";
     confetti.start(2000);
-  } else if (gameSequence !== playerSequence) {
+  } else if (gameSequence[i] !== playerSequence[i]) {
+    isWinner = false;
     message = "D'oh! Try Again?";
   }
+}
 
-  resetDiv.classList.remove("hidden"); // PC 7.3
+   // PC 7.3
   render();
 }
 
+// TO BE DELETED
+function testVals() {
+  console.log('gs: ', gameSequence)
+  console.log('ps: ', playerSequence)
+
+}
