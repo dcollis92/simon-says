@@ -50,23 +50,26 @@ function render() {
 }
 
 function genSequence() {
-  let gameSequence = buttons[Math.floor(Math.random()* buttons.length-1)]
-  
-
+  gameSequence.push(buttons[Math.floor(Math.random() * buttons.length)])
 }
+
+console.log(gameSequence)
 
 function tick() {
   seconds++
 }
 
 function handleClick(event) {
-
+  const idx = event.target.id
+  playerSequence.push(buttons[idx])
   level += 1
   display = level
   getWinner() // 6.1
-  render ()
+  // genSequence()
+  render
 }
-console.log(gameSequence)
+
+console.log(playerSequence)
 
 function getWinner() {
   if (gameSequence === playerSequence) {
