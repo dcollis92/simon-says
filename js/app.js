@@ -27,14 +27,6 @@ sequenceArray.forEach((button) => button
 .addEventListener("click", playerInput));
 resetBtn.addEventListener("click", init);
 
-btnAudio.addEventListener("click", evt => {
-  if (evt.target.id !== "btn-style") {
-    const audioElement = new Audio(`./assets/audio/${evt.target.id}.mp3`)
-    audioElement.volume = .5
-    audioElement.play()
-  }
-})
-
 /*-------------------------- Functions --------------------------*/
 init(); // PC 3.1
 
@@ -97,11 +89,21 @@ function playerInput(event) {
   if (turn !== 1) {
     return;
   } // don't run if not the Player
+  if (event.target.id !== "btn-style") {
+    const audioElement = new Audio(`./assets/audio/${event.target.id}.mp3`)
+    audioElement.volume = .5
+    audioElement.play()
+  }
   const idx = event.target.id;
   playerSequence.push(buttons[idx]);
   if (buttons[idx] !== gameSequence[playerSequence.length - 1]) {
+    message = "D'oh! Try Again?"
+    turn = 0
+    render()
     return;
   } else {
+    message = "Nice! Keep Going!"
+    render()
   }
   console.log('gs', gameSequence)
   console.log('ps', playerSequence)
