@@ -84,7 +84,7 @@ function playerInput(event) {
     // The player's last guess is correct, and they can continue
     // (you may not even need this)
   }
-  if (i === gameSequence.length - 1) {
+  if (playerSequence.length === gameSequence.length) {
     // If we've reached this point then the player's last guess is correct
     // AND we've reached the end of the current sequence, time for the computer
     // to show what's next
