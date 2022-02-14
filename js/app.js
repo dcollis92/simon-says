@@ -1,7 +1,7 @@
 /*-------------------------- Constants --------------------------*/
 const player = {
   name: "Human",
-  score = level -1
+  score: 0
 };
 
 const buttons = ["green", "red", "yellow", "blue"];
@@ -19,18 +19,18 @@ gameStatus = document.querySelector("#message"); // PC 2.2
 startButton = document.querySelector("#start-level"); // PC 3.2
 resetDiv = document.getElementById("reset-div");
 resetBtn = document.querySelector("#reset-button");
-btnAudio = document.querySelector(".btn-style")
+btnAudio = document.querySelector("#btn-style")
 
 /*----------------------- Event Listeners -----------------------*/
 startButton.addEventListener("click", compInput);
-sequenceArray.forEach((button) =>
-  button.addEventListener("click", playerInput));
+sequenceArray.forEach((button) => button
+.addEventListener("click", playerInput));
 resetBtn.addEventListener("click", init);
 
-sequenceArray.addEventListener("click", evt => {
-  if (evt.target.id !== "not-fox"){
-    const audioElement = new Audio(`../audio/${evt.target.id}.mp3`)
-    audioElement.volume = .01
+btnAudio.addEventListener("click", evt => {
+  if (evt.target.id !== "btn-style") {
+    const audioElement = new Audio(`./assets/audio/${evt.target.id}.mp3`)
+    audioElement.volume = .5
     audioElement.play()
   }
 })
@@ -94,8 +94,7 @@ function playerInput(event) {
   const idx = event.target.id;
   playerSequence.push(buttons[idx]);
   if (buttons[idx] !== gameSequence[playerSequence.length - 1]) {
-    // The player's last guess is incorrrect, and they've lost
-    // we can return out of this function.
+    return;
   } else {
   }
   console.log('gs', gameSequence)
@@ -118,6 +117,7 @@ function getWinner() {
     // game continues
   } else if (playerSequence.length === gameSequence.length && level > 15) {
     isWinner = true;
+    score = level;
     message = `${player.name} Won! You beat all ${score} levels! Play Again?`;
     confetti.start(2000);
   } else if (playerSequence.length !== (gameSequence.length -1)) {
