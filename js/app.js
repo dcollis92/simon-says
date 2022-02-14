@@ -12,8 +12,9 @@ let level, // PC 1.2
   turn,
   gameSequence,
   playerSequence,
-  /*------------------ Cached Element References ------------------*/
-  sequenceArray = document.querySelectorAll(".board-btn"); // PC 2.1
+
+/*------------------ Cached Element References ------------------*/
+sequenceArray = document.querySelectorAll(".board-btn"); // PC 2.1
 gameStatus = document.querySelector("#message"); // PC 2.2
 startButton = document.querySelector("#start-level"); // PC 3.2
 resetDiv = document.getElementById("reset-div");
@@ -108,6 +109,7 @@ function playerInput(event) {
     audioElement.volume = 0.5;
     audioElement.play();
   }
+  lightUp()
   const idx = event.target.id;
   playerSequence.push(buttons[idx]);
   if (buttons[idx] !== gameSequence[playerSequence.length - 1]) {

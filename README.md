@@ -9,3 +9,8 @@ I studied music theory and composition from the ages of 8 to 18. I grew to love 
 favicon source from https://is5-ssl.mzstatic.com/image/thumb/Purple4/v4/30/6e/d2/306ed24c-76c5-6906-07ba-70dcd251aae4/source/256x256bb.jpg
 
 confetti.js from https://github.com/SEI-Remote/confetti
+
+at 27 commits now (5 since the morning)
+able to impliment some timer functions and audio rendering, 
+but wanting to rework and simplify my code. 
+my lightUp function for the buttons is implimented, but not working
