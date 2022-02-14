@@ -2,17 +2,11 @@ html {
   box-sizing: border-box
 }
 
-/* The Universal Selector */
-*, /* All elements*/
-*::before, /* All ::before pseudo-elements */
-*::after { /* All ::after pseudo-elements */
-  /* height & width will now include border & padding by default
-     but can be over-ridden as needed */
+*::before,
+*::after { 
   box-sizing: inherit;
 }
 
-/* resets font size to be 62.5% of the user preference - 
-     in most browser configurations this will be 10px */
 :root {
   font-size: 62.5%;
 }
@@ -101,4 +95,8 @@ div.btns {
   padding: 20px;
   height: 20px;
   width: 40px;
+}
+
+.btn-style {
+  background-color: ;
 }
