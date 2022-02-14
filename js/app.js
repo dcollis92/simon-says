@@ -9,13 +9,12 @@ const buttons = ["green", "red", "yellow", "blue"]; // PC 0.2
 
 /*-------------------------- Variables --------------------------*/
 let level,
- // PC 1.2  
+  // PC 1.2
   isWinner,
-//  PC 1.3
-  turn, 
-
-/*------------------ Cached Element References ------------------*/
-sequenceArray = document.querySelectorAll(".board-btn"); // PC 2.1
+  //  PC 1.3
+  turn,
+  /*------------------ Cached Element References ------------------*/
+  sequenceArray = document.querySelectorAll(".board-btn"); // PC 2.1
 gameStatus = document.querySelector("#message"); // PC 2.2
 startButton = document.querySelector("#start-level"); // PC 3.2
 const resetDiv = document.getElementById("reset-div");
@@ -39,7 +38,6 @@ function init() {
   isWinner = null; // PC 3.2
   message = `Ready ${player.name}?`;
   display = "Play";
-  // insert timer function
   resetDiv.classList.add("hidden");
   render();
 }
@@ -50,21 +48,30 @@ function render() {
   display = level;
 }
 
-function genSequence() {
-  gameSequence.push(buttons[Math.floor(Math.random() * buttons.length)]); 
+function compRender() {
+  buttons.
+  setTimeout(() => {buttons}, 1000);
+  render()
 }
-console.log("gs", gameSequence);
+
+function playerRender() {
+
+  render()
+}
+
+function genSequence() {
+  gameSequence.push(buttons[Math.floor(Math.random() * buttons.length)]);
+  console.log("gs", gameSequence)
+}
 
 
 function compInput(event) {
   if (turn !== -1) {
-    return
+    return;
   }
-  // setTimeout(() => {
-    genSequence()
-  // }, 1000); 
+  genSequence()
   // why isn't this working?
-  level = 1;
+  compRender();
   render();
   turn = 1;
   console.log("gs", gameSequence);
@@ -73,7 +80,7 @@ console.log("gs", gameSequence);
 
 function playerInput(event) {
   if (turn !== 1) {
-    return
+    return;
   } // don't run if not the Player
   const idx = event.target.id;
   playerSequence.push(buttons[idx]);
@@ -84,6 +91,8 @@ function playerInput(event) {
     // The player's last guess is correct, and they can continue
     // (you may not even need this)
   }
+  console.log(gameSequence)
+  console.log(playerSequence)
   if (playerSequence.length === gameSequence.length) {
     // If we've reached this point then the player's last guess is correct
     // AND we've reached the end of the current sequence, time for the computer
@@ -91,10 +100,12 @@ function playerInput(event) {
     level += 1;
     display = level;
     console.log("ps", playerSequence);
-    playerSequence = []
-    turn = -1 // back to computers turn
-    compInput() // invoke computers turn
+    playerSequence = [];
+    turn = -1; // back to computers turn
+    playerRender()
+    compInput(); // invoke computers turn
   }
+  render()
 }
 
 function getWinner() {
@@ -110,4 +121,4 @@ function getWinner() {
   }
   resetDiv.classList.remove("hidden"); // PC 7.3
   render();
-};
+}
