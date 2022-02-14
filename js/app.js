@@ -1,7 +1,7 @@
 /*-------------------------- Constants --------------------------*/
 const player = {
   name: "Human",
-  score: 0
+  score: 0,
 };
 
 const buttons = ["green", "red", "yellow", "blue"];
@@ -12,19 +12,18 @@ let level, // PC 1.2
   turn,
   gameSequence,
   playerSequence,
-
-/*------------------ Cached Element References ------------------*/
-sequenceArray = document.querySelectorAll(".board-btn"); // PC 2.1
+  /*------------------ Cached Element References ------------------*/
+  sequenceArray = document.querySelectorAll(".board-btn"); // PC 2.1
 gameStatus = document.querySelector("#message"); // PC 2.2
 startButton = document.querySelector("#start-level"); // PC 3.2
 resetDiv = document.getElementById("reset-div");
 resetBtn = document.querySelector("#reset-button");
-btnAudio = document.querySelector("#btn-style")
+btnAudio = document.querySelector("#btn-style");
 
 /*----------------------- Event Listeners -----------------------*/
 startButton.addEventListener("click", compInput);
-sequenceArray.forEach((button) => button
-.addEventListener("click", playerInput));
+sequenceArray.forEach((button) =>
+  button.addEventListener("click", playerInput));
 resetBtn.addEventListener("click", init);
 
 /*-------------------------- Functions --------------------------*/
@@ -49,20 +48,21 @@ function render() {
 }
 
 function compRender() {
-  console.log(gameSequence, 'game')
+  console.log(gameSequence, "game");
   gameSequence.forEach((item, idx) => {
     setTimeout(() => {
-      console.log()
-      const audioElement = new Audio(`./assets/audio/${item}.mp3`)
-      audioElement.play()
-    }, 1500 * (idx + 1));
-  })
-  render()
+      console.log();
+      const audioElement = new Audio(`./assets/audio/${item}.mp3`);
+      audioElement.play();
+      lightUp();
+    }, 1000 * (idx + 1));
+  });
+  render();
 }
 
 function playerRender() {
-  
-  render()
+
+  render();
 }
 
 // create separate render functions for the comp and player
@@ -71,15 +71,28 @@ function playerRender() {
 // then it should remove the class to turn off audio+color
 
 function genSequence() {
-  gameSequence.push(buttons[Math.floor(Math.random() * buttons.length)]);
-  console.log("gs", gameSequence)
+  gameSequence.push(buttons[Math.floor
+  (Math.random() * buttons.length)]);
+  console.log("gs", gameSequence);
+}
+
+function lightUp() {
+  if (sequenceArray[index] === 0) {
+    document.getElementById('0').style.backgroundColor = #CCFF66;
+  } else if (buttons[index] === 1) {
+    document.getElementById('1').style.backgroundColor = #F05365;
+  } else if (buttons[index] === 2) {
+    document.getElementById('2').style.backgroundColor = #F1E8B8;
+  } else if (buttons[index] === 3) {
+    document.getElementById('3').style.backgroundColor = #D6EFFF;
+  }
 }
 
 function compInput(event) {
   if (turn !== -1) {
     return;
   }
-  genSequence()
+  genSequence();
   compRender();
   render();
   turn = 1;
@@ -90,37 +103,38 @@ function playerInput(event) {
     return;
   } // don't run if not the Player
   if (event.target.id !== "btn-style") {
-    const audioElement = new Audio(`./assets/audio/${event.target.id}.mp3`)
-    audioElement.volume = .5
-    audioElement.play()
+    const audioElement = new Audio
+    (`./assets/audio/${event.target.id}.mp3`);
+    audioElement.volume = 0.5;
+    audioElement.play();
   }
   const idx = event.target.id;
   playerSequence.push(buttons[idx]);
   if (buttons[idx] !== gameSequence[playerSequence.length - 1]) {
-    message = "D'oh! Try Again?"
-    turn = 0
-    render()
+    message = "D'oh! Try Again?";
+    turn = 0;
+    render();
     return;
   } else {
-    message = "Nice! Keep Going!"
-    render()
+    message = "Nice! Keep Going!";
+    render();
   }
-  console.log('gs', gameSequence)
-  console.log('ps', playerSequence)
+  console.log("gs", gameSequence);
+  console.log("ps", playerSequence);
   if (playerSequence.length === gameSequence.length) {
     level += 1;
     display = level;
     playerSequence = [];
     turn = -1; // back to computers turn
-    playerRender()
+    playerRender();
     compInput(); // invoke computers turn
   }
-  getWinner()
-  render()
+  getWinner();
+  render();
 }
 
 function getWinner() {
-  if (playerSequence.length === (gameSequence.length -1)) {
+  if (playerSequence.length === gameSequence.length - 1) {
     message = "Nice! Keep Going!";
     // game continues
   } else if (playerSequence.length === gameSequence.length && level > 15) {
@@ -128,7 +142,7 @@ function getWinner() {
     score = level;
     message = `${player.name} Won! You beat all ${score} levels! Play Again?`;
     confetti.start(2000);
-  } else if (playerSequence.length !== (gameSequence.length -1)) {
+  } else if (playerSequence.length !== gameSequence.length - 1) {
     message = "D'oh! Try Again?";
   }
   resetDiv.classList.remove("hidden"); // PC 7.3
