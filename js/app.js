@@ -7,11 +7,11 @@ const player = {
 const buttons = ["green", "red", "yellow", "blue"];
 
 /*-------------------------- Variables --------------------------*/
-let level,
-  // PC 1.2
-  isWinner,
-  //  PC 1.3
+let level, // PC 1.2
+  isWinner, //  PC 1.3
   turn,
+  gameSequence,
+  playerSequence,
 
 /*------------------ Cached Element References ------------------*/
 sequenceArray = document.querySelectorAll(".board-btn"); // PC 2.1
@@ -57,8 +57,14 @@ function render() {
 }
 
 function compRender() {
-  sequenceArray.classList
-  setTimeout(() => {}, 1000);
+  console.log(gameSequence, 'game')
+  gameSequence.forEach((item, idx) => {
+    setTimeout(() => {
+      console.log()
+      const audioElement = new Audio(`./assets/audio/${item}.mp3`)
+      audioElement.play()
+    }, 1500 * (idx + 1));
+  })
   render()
 }
 
