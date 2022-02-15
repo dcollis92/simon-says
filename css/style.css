@@ -50,7 +50,7 @@ div.btns {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
+  border-radius: 20%;
   margin: 4px;
 }
 
@@ -83,6 +83,7 @@ div.btns {
   color: black;
   grid-column: 3 / 5;
   grid-row: 3 / 5;
+  border-radius: 30%;
 }
 
 .hidden {

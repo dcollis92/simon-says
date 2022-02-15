@@ -7,19 +7,18 @@ const player = {
 const buttons = ["green", "red", "yellow", "blue"];
 
 /*-------------------------- Variables --------------------------*/
-let level, // PC 1.2
-  isWinner, //  PC 1.3
-  turn,
-  gameSequence,
-  playerSequence,
+let level,
+    isWinner, 
+    turn,
+    gameSequence,
+    playerSequence,
 
 /*------------------ Cached Element References ------------------*/
-sequenceArray = document.querySelectorAll(".board-btn"); // PC 2.1
-gameStatus = document.querySelector("#message"); // PC 2.2
-startButton = document.querySelector("#start-level"); // PC 3.2
+sequenceArray = document.querySelectorAll(".board-btn");
+gameStatus = document.querySelector("#message"); 
+startButton = document.querySelector("#start-level"); 
 resetDiv = document.getElementById("reset-div");
 resetBtn = document.querySelector("#reset-button");
-// btnAudio = document.querySelector("#btn-style");
 
 /*----------------------- Event Listeners -----------------------*/
 startButton.addEventListener("click", compInput);
@@ -28,17 +27,17 @@ sequenceArray.forEach((button) =>
 resetBtn.addEventListener("click", init);
 
 /*-------------------------- Functions --------------------------*/
-init(); // PC 3.1
+init();
 
 function init() {
-  gameSequence = []; // PC 3.2
-  playerSequence = []; // PC 3.2
-  level = 1; // PC 3.2
+  gameSequence = [];
+  playerSequence = [];
+  level = 1; 
   turn = -1;
-  isWinner = null; // PC 3.2
+  isWinner = null;
   message = `Ready ${player.name}?`;
   display = "Play";
-  resetDiv.classList.add("hidden");
+  resetBtn.classList.add("hidden");
   render();
 }
 
@@ -50,31 +49,10 @@ function render() {
   }, 450)
 }
 
-function compRender() {
-  console.log(gameSequence, "game");
-  gameSequence.forEach((item, idx) => {
-    setTimeout(() => {
-      console.log();
-      const audioElement = new Audio(`./assets/audio/${item}.mp3`);
-      audioElement.play();
-      lightUp(gameSequence, idx);
-    }, 700 * (idx + 1));
-  });
-  render();
-}
-
-function playerRender(idx, color) {
-  if (idx !== "btn-style") {
-    const audioElement = new Audio(`./assets/audio/${color}.mp3`);
-    audioElement.volume = 0.5;
-    audioElement.play();
-  }
-  lightUp(playerSequence, playerSequence.length - 1);
-}
-
 function genSequence() {
-  gameSequence.push(buttons[Math.floor(Math.random() * buttons.length)]);
-  console.log("gs", gameSequence);
+  gameSequence.push(buttons[Math.floor
+  (Math.random() * buttons.length)]);
+  // console.log("gs", gameSequence);
 }
 
 function lightUp(seq, idx) {
@@ -114,7 +92,19 @@ function compInput(event) {
   }
   render();
   turn = 1;
-  console.log(level);
+}
+
+function compRender() {
+  // console.log(gameSequence, "game");
+  gameSequence.forEach((item, idx) => {
+    setTimeout(() => {
+      // console.log();
+      const audioElement = new Audio(`./assets/audio/${item}.mp3`);
+      audioElement.play();
+      lightUp(gameSequence, idx);
+    }, 750 * (idx + 1));
+  });
+  // render();
 }
 
 function playerInput(event) {
@@ -124,17 +114,19 @@ function playerInput(event) {
   const idx = event.target.id;
   playerSequence.push(buttons[idx]);
   playerRender(idx, buttons[idx]);
-  if (buttons[idx] !== gameSequence[playerSequence.length - 1]) {
+  if (buttons[idx] !== gameSequence[playerSequence.length -1]) {
     message = "D'oh! Try Again?";
     turn = 0;
+    resetBtn.classList.remove("hidden")
     render();
     return;
   } else {
     message = "Nice! Keep Going!";
-    render();
+    // render();
   }
-  console.log("gs", gameSequence);
-  console.log("ps", playerSequence);
+  // render();
+  // console.log("gs", gameSequence);
+  // console.log("ps", playerSequence);
   if (playerSequence.length === gameSequence.length) {
     level += 1;
     display = level;
@@ -143,20 +135,30 @@ function playerInput(event) {
     compInput();
   }
   getWinner();
-  render();
+  // render();
+}
+
+function playerRender(idx, color) {
+  if (idx !== "btn-style") {
+    const audioElement = new Audio(`./assets/audio/${color}.mp3`);
+    audioElement.volume = 0.5;
+    audioElement.play();
+    console.log(color)
+  }
+  lightUp(playerSequence, playerSequence.length - 1);
 }
 
 function getWinner() {
-  if (playerSequence.length === gameSequence.length - 1) {
-    message = "Nice! Keep Going!";
-  } else if (playerSequence.length === gameSequence.length && level > 15) {
-    isWinner = true;
-    score = level;
-    message = `${player.name} Won! You beat all ${score} levels! Play Again?`;
-    confetti.start(2000);
-  } else if (playerSequence.length !== gameSequence.length - 1) {
-    message = "D'oh! Try Again?";
-  }
-  resetDiv.classList.remove("hidden");
-  render();
+  // if (playerSequence.length === gameSequence.length - 1) {
+  //   message = "Nice! Keep Going!";
+  // } else if (playerSequence.length === gameSequence.length && level > 15) {
+  //   isWinner = true;
+  //   score = level;
+  //   message = `${player.name} Won! You beat all ${score} levels! Play Again?`;
+  //   confetti.start(2000);
+  // } else if (playerSequence.length !== gameSequence.length - 1) {
+  //   message = "D'oh! Try Again?";
+  // }
+  // resetDiv.classList.remove("hidden");
+  // render();
 }
