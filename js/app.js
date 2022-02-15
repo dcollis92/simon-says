@@ -43,9 +43,11 @@ function init() {
 }
 
 function render() {
-  gameStatus.textContent = message;
-  startButton.textContent = display;
-  display = level;
+  setTimeout(() => {
+    gameStatus.textContent = message;
+    startButton.textContent = display;
+    display = level;
+  }, 450)
 }
 
 function compRender() {
@@ -56,53 +58,46 @@ function compRender() {
       const audioElement = new Audio(`./assets/audio/${item}.mp3`);
       audioElement.play();
       lightUp(gameSequence, idx);
-    }, 500 * (idx + 1));
+    }, 700 * (idx + 1));
   });
   render();
 }
 
 function playerRender(idx, color) {
   if (idx !== "btn-style") {
-    const audioElement = new Audio
-    (`./assets/audio/${color}.mp3`);
+    const audioElement = new Audio(`./assets/audio/${color}.mp3`);
     audioElement.volume = 0.5;
-    audioElement.play(); 
+    audioElement.play();
   }
-  lightUp(playerSequence, playerSequence.length -1)
+  lightUp(playerSequence, playerSequence.length - 1);
 }
 
-// create separate render functions for the comp and player
-// each render should add a class assigning color+note
-// then a setTimeout to run through the whole array, checking 1 by one what each item is, delaying by a second each.
-// then it should remove the class to turn off audio+color
-
 function genSequence() {
-  gameSequence.push(buttons[Math.floor
-  (Math.random() * buttons.length)]);
+  gameSequence.push(buttons[Math.floor(Math.random() * buttons.length)]);
   console.log("gs", gameSequence);
 }
 
 function lightUp(seq, idx) {
-  if (seq[idx] === 'green') {
-    document.getElementById('0').style.backgroundColor = '#CCFF66';
-  } else if (seq[idx] === 'red') {
-    document.getElementById('1').style.backgroundColor = '#F05365';
-  } else if (seq[idx] === 'yellow') {
-    document.getElementById('2').style.backgroundColor = '#F1E8B8';
-  } else if (seq[idx] === 'blue') {
-    document.getElementById('3').style.backgroundColor = '#D6EFFF';
+  if (seq[idx] === "green") {
+    document.getElementById("0").style.backgroundColor = "#CCFF66";
+  } else if (seq[idx] === "red") {
+    document.getElementById("1").style.backgroundColor = "#F05365";
+  } else if (seq[idx] === "yellow") {
+    document.getElementById("2").style.backgroundColor = "#F1E8B8";
+  } else if (seq[idx] === "blue") {
+    document.getElementById("3").style.backgroundColor = "#D6EFFF";
   }
-  setTimeout(() => { 
-    if (seq[idx] === 'green') {
-      document.getElementById('0').style.backgroundColor = 'green';
-    } else if (seq[idx] === 'red') {
-      document.getElementById('1').style.backgroundColor = 'red';
-    } else if (seq[idx] === 'yellow') {
-      document.getElementById('2').style.backgroundColor = 'yellow';
-    } else if (seq[idx] === 'blue') {
-      document.getElementById('3').style.backgroundColor = 'blue';
+  setTimeout(() => {
+    if (seq[idx] === "green") {
+      document.getElementById("0").style.backgroundColor = "darkgreen";
+    } else if (seq[idx] === "red") {
+      document.getElementById("1").style.backgroundColor = "darkred";
+    } else if (seq[idx] === "yellow") {
+      document.getElementById("2").style.backgroundColor = "goldenrod";
+    } else if (seq[idx] === "blue") {
+      document.getElementById("3").style.backgroundColor = "darkblue";
     }
-  }, 500)
+  }, 500);
 }
 
 function compInput(event) {
@@ -110,11 +105,16 @@ function compInput(event) {
     return;
   }
   genSequence();
-  setTimeout(() => {
-    compRender()
-  }, 1000)
+  if (level === 1) {
+    compRender();
+  } else {
+    setTimeout(() => {
+      compRender();
+    }, 1000);
+  }
   render();
   turn = 1;
+  console.log(level);
 }
 
 function playerInput(event) {
@@ -139,9 +139,8 @@ function playerInput(event) {
     level += 1;
     display = level;
     playerSequence = [];
-    turn = -1; // back to computers turn
-
-    compInput(); // invoke computers turn
+    turn = -1;
+    compInput();
   }
   getWinner();
   render();
@@ -150,7 +149,6 @@ function playerInput(event) {
 function getWinner() {
   if (playerSequence.length === gameSequence.length - 1) {
     message = "Nice! Keep Going!";
-    // game continues
   } else if (playerSequence.length === gameSequence.length && level > 15) {
     isWinner = true;
     score = level;
@@ -159,6 +157,6 @@ function getWinner() {
   } else if (playerSequence.length !== gameSequence.length - 1) {
     message = "D'oh! Try Again?";
   }
-  resetDiv.classList.remove("hidden"); // PC 7.3
+  resetDiv.classList.remove("hidden");
   render();
 }
