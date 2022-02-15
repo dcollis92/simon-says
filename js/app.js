@@ -19,7 +19,7 @@ gameStatus = document.querySelector("#message"); // PC 2.2
 startButton = document.querySelector("#start-level"); // PC 3.2
 resetDiv = document.getElementById("reset-div");
 resetBtn = document.querySelector("#reset-button");
-btnAudio = document.querySelector("#btn-style");
+// btnAudio = document.querySelector("#btn-style");
 
 /*----------------------- Event Listeners -----------------------*/
 startButton.addEventListener("click", compInput);
@@ -55,15 +55,20 @@ function compRender() {
       console.log();
       const audioElement = new Audio(`./assets/audio/${item}.mp3`);
       audioElement.play();
-      lightUp();
-    }, 1000 * (idx + 1));
+      lightUp(gameSequence, idx);
+    }, 500 * (idx + 1));
   });
   render();
 }
 
-function playerRender() {
-
-  render();
+function playerRender(idx, color) {
+  if (idx !== "btn-style") {
+    const audioElement = new Audio
+    (`./assets/audio/${color}.mp3`);
+    audioElement.volume = 0.5;
+    audioElement.play(); 
+  }
+  lightUp(playerSequence, playerSequence.length -1)
 }
 
 // create separate render functions for the comp and player
@@ -77,16 +82,27 @@ function genSequence() {
   console.log("gs", gameSequence);
 }
 
-function lightUp() {
-  if (sequenceArray[index] === 0) {
-    document.getElementById('0').style.backgroundColor = #CCFF66;
-  } else if (buttons[index] === 1) {
-    document.getElementById('1').style.backgroundColor = #F05365;
-  } else if (buttons[index] === 2) {
-    document.getElementById('2').style.backgroundColor = #F1E8B8;
-  } else if (buttons[index] === 3) {
-    document.getElementById('3').style.backgroundColor = #D6EFFF;
+function lightUp(seq, idx) {
+  if (seq[idx] === 'green') {
+    document.getElementById('0').style.backgroundColor = '#CCFF66';
+  } else if (seq[idx] === 'red') {
+    document.getElementById('1').style.backgroundColor = '#F05365';
+  } else if (seq[idx] === 'yellow') {
+    document.getElementById('2').style.backgroundColor = '#F1E8B8';
+  } else if (seq[idx] === 'blue') {
+    document.getElementById('3').style.backgroundColor = '#D6EFFF';
   }
+  setTimeout(() => { 
+    if (seq[idx] === 'green') {
+      document.getElementById('0').style.backgroundColor = 'green';
+    } else if (seq[idx] === 'red') {
+      document.getElementById('1').style.backgroundColor = 'red';
+    } else if (seq[idx] === 'yellow') {
+      document.getElementById('2').style.backgroundColor = 'yellow';
+    } else if (seq[idx] === 'blue') {
+      document.getElementById('3').style.backgroundColor = 'blue';
+    }
+  }, 500)
 }
 
 function compInput(event) {
@@ -94,7 +110,9 @@ function compInput(event) {
     return;
   }
   genSequence();
-  compRender();
+  setTimeout(() => {
+    compRender()
+  }, 1000)
   render();
   turn = 1;
 }
@@ -103,15 +121,9 @@ function playerInput(event) {
   if (turn !== 1) {
     return;
   } // don't run if not the Player
-  if (event.target.id !== "btn-style") {
-    const audioElement = new Audio
-    (`./assets/audio/${event.target.id}.mp3`);
-    audioElement.volume = 0.5;
-    audioElement.play();
-  }
-  lightUp()
   const idx = event.target.id;
   playerSequence.push(buttons[idx]);
+  playerRender(idx, buttons[idx]);
   if (buttons[idx] !== gameSequence[playerSequence.length - 1]) {
     message = "D'oh! Try Again?";
     turn = 0;
@@ -128,7 +140,7 @@ function playerInput(event) {
     display = level;
     playerSequence = [];
     turn = -1; // back to computers turn
-    playerRender();
+
     compInput(); // invoke computers turn
   }
   getWinner();
