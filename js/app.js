@@ -6,6 +6,14 @@ const player = {
 
 const buttons = ["green", "red", "yellow", "blue"];
 
+const winSong = [
+"green", "red", "blue", "yellow",
+"blue", "red", "green", "red",
+"blue", "yellow", "green", "red", 
+"blue", "yellow",
+"blue", "red", "green", "red", "blue", "yellow",
+]
+
 /*-------------------------- Variables --------------------------*/
 let level,
     isWinner, 
@@ -55,7 +63,7 @@ function genSequence() {
   // console.log("gs", gameSequence);
 }
 
-function lightUp(seq, idx) {
+function lightUp(seq, idx, playRate) {
   if (seq[idx] === "green") {
     document.getElementById("0").style.backgroundColor = "#CCFF66";
   } else if (seq[idx] === "red") {
@@ -75,11 +83,13 @@ function lightUp(seq, idx) {
     } else if (seq[idx] === "blue") {
       document.getElementById("3").style.backgroundColor = "darkblue";
     }
-  }, 400);
+  }, playRate);
 }
 
+// (isWinner === true ? 200 : 400)
+
 function compInput(event) {
-  if (turn !== -1) {
+  if (turn !== -1 || isWinner) {
     return;
   }
   genSequence();
@@ -108,7 +118,7 @@ function btnRender(color, seq, seqIdx) {
   const audioElement = new Audio(`./assets/audio/${color}.mp3`);
       audioElement.volume = 1;
       audioElement.play();
-      lightUp(seq, seqIdx); 
+      lightUp(seq, seqIdx, isWinner ? 1000 : 400); 
 }
 
 function playerRender(color) {
@@ -119,7 +129,7 @@ function playerInput(event) {
   const idx = event.target.id;
   if (turn !== 1 || idx === "btn-style") {
     return;
-  } // don't run if not the Player
+  }
   playerSequence.push(buttons[idx]);
   playerRender(buttons[idx]);
   if (buttons[idx] !== gameSequence[playerSequence.length -1]) {
@@ -144,15 +154,24 @@ function playerInput(event) {
   getWinner();
 }
 
-
-
 function getWinner() {
   if (level > 5) {
     score = level -1;
     display = 'WINNER'
+    isWinner = true
     message = `${player.name} Won! You beat all ${score} levels! Play Again?`;
     confetti.start(2000);
+    // playWinSong()
     resetDiv.classList.remove("hidden");
     return;
   } 
+}
+
+function playWinSong() {
+  winSong.forEach((color, seqIdx) => {
+    setTimeout(() => {
+      btnRender(color, seqIdx)
+    },1000 * (seqIdx + 1));
+  });
+
 }
