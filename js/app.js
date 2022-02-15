@@ -75,7 +75,7 @@ function lightUp(seq, idx) {
     } else if (seq[idx] === "blue") {
       document.getElementById("3").style.backgroundColor = "darkblue";
     }
-  }, 500);
+  }, 700);
 }
 
 function compInput(event) {
@@ -99,9 +99,8 @@ function compRender() {
   gameSequence.forEach((color, seqIdx) => {
     setTimeout(() => {
       btnRender(color, gameSequence, seqIdx)
-    }, 750 * (seqIdx + 1));
+    }, 700 * (seqIdx + 1));
   });
-  // render();
 }
 
 function btnRender(color, seq, seqIdx) {
@@ -130,9 +129,7 @@ function playerInput(event) {
     return;
   } else {
     message = "Nice! Keep Going!";
-    // render();
   }
-  // render();
   console.log("gs", gameSequence);
   console.log("ps", playerSequence);
   if (playerSequence.length === gameSequence.length) {
@@ -143,7 +140,6 @@ function playerInput(event) {
     compInput();
   }
   getWinner();
-  // render();
 }
 
 
