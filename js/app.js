@@ -34,7 +34,7 @@ function init() {
   playerSequence = [];
   level = 1; 
   turn = -1;
-  isWinner = null;
+  isWinner = null
   message = `Ready ${player.name}?`;
   display = "Play";
   resetBtn.classList.add("hidden");
@@ -75,7 +75,7 @@ function lightUp(seq, idx) {
     } else if (seq[idx] === "blue") {
       document.getElementById("3").style.backgroundColor = "darkblue";
     }
-  }, 700);
+  }, 400);
 }
 
 function compInput(event) {
@@ -99,13 +99,14 @@ function compRender() {
   gameSequence.forEach((color, seqIdx) => {
     setTimeout(() => {
       btnRender(color, gameSequence, seqIdx)
-    }, 700 * (seqIdx + 1));
+    },500 * (seqIdx + 1));
   });
+  console.log("gs", gameSequence);
 }
 
 function btnRender(color, seq, seqIdx) {
   const audioElement = new Audio(`./assets/audio/${color}.mp3`);
-      audioElement.volume = 0.5;
+      audioElement.volume = 1;
       audioElement.play();
       lightUp(seq, seqIdx); 
 }
@@ -124,11 +125,12 @@ function playerInput(event) {
   if (buttons[idx] !== gameSequence[playerSequence.length -1]) {
     message = "D'oh! Try Again?";
     turn = 0;
+    isWinner = false
     resetBtn.classList.remove("hidden")
     render();
     return;
   } else {
-    message = "Nice! Keep Going!";
+    message = `Level ${level}! Nice! Keep Going!`;
   }
   console.log("gs", gameSequence);
   console.log("ps", playerSequence);
@@ -145,16 +147,12 @@ function playerInput(event) {
 
 
 function getWinner() {
-  // if (playerSequence.length === gameSequence.length - 1) {
-  //   message = "Nice! Keep Going!";
-  // } else if (playerSequence.length === gameSequence.length && level > 15) {
-  //   isWinner = true;
-  //   score = level;
-  //   message = `${player.name} Won! You beat all ${score} levels! Play Again?`;
-  //   confetti.start(2000);
-  // } else if (playerSequence.length !== gameSequence.length - 1) {
-  //   message = "D'oh! Try Again?";
-  // }
-  // resetDiv.classList.remove("hidden");
-  // render();
+  if (level > 5) {
+    score = level -1;
+    display = 'WINNER'
+    message = `${player.name} Won! You beat all ${score} levels! Play Again?`;
+    confetti.start(2000);
+    resetDiv.classList.remove("hidden");
+    return;
+  } 
 }

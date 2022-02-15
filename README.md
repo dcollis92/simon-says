@@ -14,6 +14,7 @@ Total 32 (5 more)
 got Lights and Audio working, now needing to adjust the Timeouts to address some lagging issues
 
 
+
 Todays goals:
 - Get the reset div to hold space for the button while hidden
 - get the play div back in the center
