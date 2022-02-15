@@ -96,24 +96,32 @@ function compInput(event) {
 
 function compRender() {
   // console.log(gameSequence, "game");
-  gameSequence.forEach((item, idx) => {
+  gameSequence.forEach((color, seqIdx) => {
     setTimeout(() => {
-      // console.log();
-      const audioElement = new Audio(`./assets/audio/${item}.mp3`);
-      audioElement.play();
-      lightUp(gameSequence, idx);
-    }, 750 * (idx + 1));
+      btnRender(color, gameSequence, seqIdx)
+    }, 750 * (seqIdx + 1));
   });
   // render();
 }
 
+function btnRender(color, seq, seqIdx) {
+  const audioElement = new Audio(`./assets/audio/${color}.mp3`);
+      audioElement.volume = 0.5;
+      audioElement.play();
+      lightUp(seq, seqIdx); 
+}
+
+function playerRender(color) {
+  btnRender(color, playerSequence, playerSequence.length -1)
+}
+
 function playerInput(event) {
-  if (turn !== 1) {
+  const idx = event.target.id;
+  if (turn !== 1 || idx === "btn-style") {
     return;
   } // don't run if not the Player
-  const idx = event.target.id;
   playerSequence.push(buttons[idx]);
-  playerRender(idx, buttons[idx]);
+  playerRender(buttons[idx]);
   if (buttons[idx] !== gameSequence[playerSequence.length -1]) {
     message = "D'oh! Try Again?";
     turn = 0;
@@ -125,8 +133,8 @@ function playerInput(event) {
     // render();
   }
   // render();
-  // console.log("gs", gameSequence);
-  // console.log("ps", playerSequence);
+  console.log("gs", gameSequence);
+  console.log("ps", playerSequence);
   if (playerSequence.length === gameSequence.length) {
     level += 1;
     display = level;
@@ -138,15 +146,7 @@ function playerInput(event) {
   // render();
 }
 
-function playerRender(idx, color) {
-  if (idx !== "btn-style") {
-    const audioElement = new Audio(`./assets/audio/${color}.mp3`);
-    audioElement.volume = 0.5;
-    audioElement.play();
-    console.log(color)
-  }
-  lightUp(playerSequence, playerSequence.length - 1);
-}
+
 
 function getWinner() {
   // if (playerSequence.length === gameSequence.length - 1) {

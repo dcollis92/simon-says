@@ -15,3 +15,4 @@ Todays goals:
 - get the play div back in the center
 - get better font
 - get better CSS
+- weird lag in mobile version that eventually crashes
