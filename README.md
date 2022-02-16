@@ -10,12 +10,11 @@ favicon source from https://is5-ssl.mzstatic.com/image/thumb/Purple4/v4/30/6e/d2
 
 confetti.js from https://github.com/SEI-Remote/confetti
 
-Total 32 (5 more)
-got Lights and Audio working, now needing to adjust the Timeouts to address some lagging issues
-
-
+fonts taken from Google Fonts:
+https://fonts.google.com/share?selection.family=Bungee%20Shade%7COxanium:wght@300
 
 Todays goals:
 - Get the reset div to hold space for the button while hidden
-- get the play div back in the center
 - mobile still crashing
+- get message to resize based on screen
+- get entire wrap div to be smaller on the screen for viewability
