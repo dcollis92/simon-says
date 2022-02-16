@@ -7,34 +7,17 @@ const player = {
 const buttons = ["green", "red", "yellow", "blue"];
 
 const winSeq = [
-  "green",
-  "red",
-  "blue",
-  "yellow",
-  "green",
-  "red",
-  "blue",
-  "yellow",
-  "green",
-  "red",
-  "blue",
-  "yellow",
-  "green",
-  "red",
-  "blue",
-  "yellow",
-  "green",
-  "red",
-  "blue",
-  "yellow",
-  "green",
-  "red",
-  "blue",
-  "yellow",
-  "green",
-  "red",
-  "blue",
-  "yellow",
+  "green", "red", "blue", "yellow",
+  "green", "red", "blue", "yellow",
+  "green", "red", "blue", "yellow",
+  "green", "red", "blue", "yellow",
+  "green", "red", "blue", "yellow",
+  "green", "red", "blue", "yellow",
+  "green", "red", "blue", "yellow",
+  "green", "red", "blue", "yellow",
+  "green", "red", "blue", "yellow",
+  "green", "red", "blue", "yellow",
+  "green", "red", "blue", "yellow",
 ];
 
 /*-------------------------- Variables --------------------------*/
@@ -98,11 +81,12 @@ function btnRender(color, seq, seqIdx) {
   const audioElement = new Audio(`./assets/audio/${color}.mp3`);
   audioElement.volume = 0.7;
   audioElement.play();
-  lightUp(seq, seqIdx, 400);
+  lightUp(seq, seqIdx);
 }
 
 function genSequence() {
-  gameSequence.push(buttons[Math.floor(Math.random() * buttons.length)]);
+  gameSequence.push(buttons[Math.floor
+  (Math.random() * buttons.length)]);
   // console.log("gs", gameSequence);
 }
 
@@ -128,10 +112,9 @@ function lightUp(seq, idx) {
     }
   }, 400);
 }
-// playWinSong()
 
 function compInput() {
-  if (turn !== -1 || level > 2) {
+  if (turn !== -1 || level > 5) {
     return;
   }
   genSequence();
@@ -176,7 +159,7 @@ function playerInput(event) {
 }
 
 function getWinner() {
-  if (level > 2) {
+  if (level > 5) {
     score = level - 1;
     display = "WINNER";
     isWinner = true;
@@ -184,8 +167,8 @@ function getWinner() {
     confetti.start(14000);
     playWinSong();
     resetDiv.classList.remove("hidden");
-    return;
   }
+  render()
 }
 
 function playWinSong() {
@@ -195,10 +178,10 @@ function playWinSong() {
     winSeq.forEach((color, seqIdx) => {
       setTimeout(() => {
         winRender(color, winSeq, seqIdx);
-      }, 500 * (seqIdx + 1));
+      }, 300 * (seqIdx + 1));
     });
 }
 
 function winRender(color, seq, seqIdx) {
-  lightUp(seq, seqIdx, 300);
+  lightUp(seq, seqIdx);
 }
