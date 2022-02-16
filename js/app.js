@@ -98,7 +98,7 @@ function lightUp(seq, idx) {
   } else if (seq[idx] === "yellow") {
     document.getElementById("2").style.backgroundColor = "#F1E8B8";
   } else if (seq[idx] === "blue") {
-    document.getElementById("3").style.backgroundColor = "#D6EFFF";
+    document.getElementById("3").style.backgroundColor = "#8390FA";
   }
   setTimeout(() => {
     if (seq[idx] === "green") {
@@ -164,7 +164,7 @@ function getWinner() {
     display = "WINNER";
     isWinner = true;
     message = `${player.name} Won! You beat all ${score} levels! Play Again?`;
-    confetti.start(14000);
+    confetti.start(12000);
     playWinSong();
     resetDiv.classList.remove("hidden");
   }
