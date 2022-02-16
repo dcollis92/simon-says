@@ -18,7 +18,4 @@ got Lights and Audio working, now needing to adjust the Timeouts to address some
 Todays goals:
 - Get the reset div to hold space for the button while hidden
 - get the play div back in the center
-- get better font
-- get better CSS
-- weird lag in mobile version that eventually crashes
-- audio glitch   
+- mobile still crashing

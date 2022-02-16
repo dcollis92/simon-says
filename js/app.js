@@ -28,17 +28,15 @@ let level,
   playerSequence,
 
 /*------------------ Cached Element References ------------------*/
-sequenceArray = document.querySelectorAll(".board-btn");
+sequenceArray = document.querySelectorAll(".btns");
 gameStatus = document.querySelector("#message");
 startButton = document.querySelector("#start-level");
-resetDiv = document.getElementById("reset-div");
 resetBtn = document.querySelector("#reset-button");
 
 /*----------------------- Event Listeners -----------------------*/
 startButton.addEventListener("click", compInput);
 sequenceArray.forEach((button) =>
-  button.addEventListener("click", playerInput)
-);
+  button.addEventListener("click", playerInput));
 resetBtn.addEventListener("click", init);
 
 /*-------------------------- Functions --------------------------*/
@@ -166,7 +164,7 @@ function getWinner() {
     message = `${player.name} Won! You beat all ${score} levels! Play Again?`;
     confetti.start(11000);
     playWinSong();
-    resetDiv.classList.remove("hidden");
+    resetBtn.classList.remove("hidden");
     render();
   }
 }
