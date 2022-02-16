@@ -37,17 +37,23 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="./css/style.css"/>
-    <link rel="preload" href="./assets/audio/green.mp3">
-    <link rel="preload" href="./assets/audio/red.mp3">
-    <link rel="preload" href="./assets/audio/blue.mp3">
-    <link rel="preload" href="./assets/audio/yellow.mp3">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Oxanium:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="preload" href="./assets/audio/green.mp3" />
+    <link rel="preload" href="./assets/audio/red.mp3" />
+    <link rel="preload" href="./assets/audio/blue.mp3" />
+    <link rel="preload" href="./assets/audio/yellow.mp3" />
     <title>Simon Says</title>
   </head>
   <body>
     <div class="wrap">
       <div class="game-title">
-        <h1 class="display-1">Simon Says</h1>
+        <h1 class="display">Simon Says</h1>
       </div>
       <h3 id="message">Message</h3>
 
@@ -62,7 +68,12 @@
     <br />
     <div class="reset-space">
       <div id="reset-div" class="">
-        <button class="btn btn-outline-dark hidden" id="reset-button" type="reset">REPLAY?
+        <button
+          class="btn btn-outline-dark hidden"
+          id="reset-button"
+          type="reset"
+        >
+          REPLAY?
         </button>
       </div>
     </div>
