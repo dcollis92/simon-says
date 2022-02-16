@@ -164,11 +164,11 @@ function getWinner() {
     display = "WINNER";
     isWinner = true;
     message = `${player.name} Won! You beat all ${score} levels! Play Again?`;
-    confetti.start(12000);
+    confetti.start(11000);
     playWinSong();
     resetDiv.classList.remove("hidden");
+    render();
   }
-  render()
 }
 
 function playWinSong() {
