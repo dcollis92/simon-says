@@ -6,32 +6,56 @@ const player = {
 
 const buttons = ["green", "red", "yellow", "blue"];
 
-const winSong = [
-"green", "red", "blue", "yellow",
-"blue", "red", "green", "red",
-"blue", "yellow", "green", "red", 
-"blue", "yellow",
-"blue", "red", "green", "red", "blue", "yellow",
-]
+const winSeq = [
+  "green",
+  "red",
+  "blue",
+  "yellow",
+  "green",
+  "red",
+  "blue",
+  "yellow",
+  "green",
+  "red",
+  "blue",
+  "yellow",
+  "green",
+  "red",
+  "blue",
+  "yellow",
+  "green",
+  "red",
+  "blue",
+  "yellow",
+  "green",
+  "red",
+  "blue",
+  "yellow",
+  "green",
+  "red",
+  "blue",
+  "yellow",
+];
 
 /*-------------------------- Variables --------------------------*/
 let level,
-    isWinner, 
-    turn,
-    gameSequence,
-    playerSequence,
+  isWinner,
+  turn,
+  gameSequence,
+  playerSequence,
 
 /*------------------ Cached Element References ------------------*/
 sequenceArray = document.querySelectorAll(".board-btn");
-gameStatus = document.querySelector("#message"); 
-startButton = document.querySelector("#start-level"); 
+gameStatus = document.querySelector("#message");
+startButton = document.querySelector("#start-level");
 resetDiv = document.getElementById("reset-div");
 resetBtn = document.querySelector("#reset-button");
 
 /*----------------------- Event Listeners -----------------------*/
 startButton.addEventListener("click", compInput);
 sequenceArray.forEach((button) =>
-  button.addEventListener("click", playerInput));
+  button.addEventListener("click", playerInput)
+);
 resetBtn.addEventListener("click", init);
 
 /*-------------------------- Functions --------------------------*/
@@ -40,9 +64,9 @@ init();
 function init() {
   gameSequence = [];
   playerSequence = [];
-  level = 1; 
+  level = 1;
   turn = -1;
-  isWinner = null
+  isWinner = null;
   message = `Ready ${player.name}?`;
   display = "Play";
   resetBtn.classList.add("hidden");
@@ -54,16 +78,35 @@ function render() {
     gameStatus.textContent = message;
     startButton.textContent = display;
     display = level;
-  }, 450)
+  }, 450);
+}
+
+function compRender() {
+  gameSequence.forEach((color, seqIdx) => {
+    setTimeout(() => {
+      btnRender(color, gameSequence, seqIdx);
+    }, 500 * (seqIdx + 1));
+  });
+  console.log("gs", gameSequence);
+}
+
+function playerRender(color) {
+  btnRender(color, playerSequence, playerSequence.length - 1);
+}
+
+function btnRender(color, seq, seqIdx) {
+  const audioElement = new Audio(`./assets/audio/${color}.mp3`);
+  audioElement.volume = 0.7;
+  audioElement.play();
+  lightUp(seq, seqIdx, 400);
 }
 
 function genSequence() {
-  gameSequence.push(buttons[Math.floor
-  (Math.random() * buttons.length)]);
+  gameSequence.push(buttons[Math.floor(Math.random() * buttons.length)]);
   // console.log("gs", gameSequence);
 }
 
-function lightUp(seq, idx, playRate) {
+function lightUp(seq, idx) {
   if (seq[idx] === "green") {
     document.getElementById("0").style.backgroundColor = "#CCFF66";
   } else if (seq[idx] === "red") {
@@ -83,13 +126,12 @@ function lightUp(seq, idx, playRate) {
     } else if (seq[idx] === "blue") {
       document.getElementById("3").style.backgroundColor = "darkblue";
     }
-  }, playRate);
+  }, 400);
 }
+// playWinSong()
 
-// (isWinner === true ? 200 : 400)
-
-function compInput(event) {
-  if (turn !== -1 || isWinner) {
+function compInput() {
+  if (turn !== -1 || level > 2) {
     return;
   }
   genSequence();
@@ -104,27 +146,6 @@ function compInput(event) {
   turn = 1;
 }
 
-function compRender() {
-  // console.log(gameSequence, "game");
-  gameSequence.forEach((color, seqIdx) => {
-    setTimeout(() => {
-      btnRender(color, gameSequence, seqIdx)
-    },500 * (seqIdx + 1));
-  });
-  console.log("gs", gameSequence);
-}
-
-function btnRender(color, seq, seqIdx) {
-  const audioElement = new Audio(`./assets/audio/${color}.mp3`);
-      audioElement.volume = 1;
-      audioElement.play();
-      lightUp(seq, seqIdx, isWinner ? 1000 : 400); 
-}
-
-function playerRender(color) {
-  btnRender(color, playerSequence, playerSequence.length -1)
-}
-
 function playerInput(event) {
   const idx = event.target.id;
   if (turn !== 1 || idx === "btn-style") {
@@ -132,11 +153,11 @@ function playerInput(event) {
   }
   playerSequence.push(buttons[idx]);
   playerRender(buttons[idx]);
-  if (buttons[idx] !== gameSequence[playerSequence.length -1]) {
+  if (buttons[idx] !== gameSequence[playerSequence.length - 1]) {
     message = "D'oh! Try Again?";
     turn = 0;
-    isWinner = false
-    resetBtn.classList.remove("hidden")
+    isWinner = false;
+    resetBtn.classList.remove("hidden");
     render();
     return;
   } else {
@@ -155,23 +176,29 @@ function playerInput(event) {
 }
 
 function getWinner() {
-  if (level > 5) {
-    score = level -1;
-    display = 'WINNER'
-    isWinner = true
+  if (level > 2) {
+    score = level - 1;
+    display = "WINNER";
+    isWinner = true;
     message = `${player.name} Won! You beat all ${score} levels! Play Again?`;
-    confetti.start(2000);
-    // playWinSong()
+    confetti.start(14000);
+    playWinSong();
     resetDiv.classList.remove("hidden");
     return;
-  } 
+  }
 }
 
 function playWinSong() {
-  winSong.forEach((color, seqIdx) => {
-    setTimeout(() => {
-      btnRender(color, seqIdx)
-    },1000 * (seqIdx + 1));
-  });
+  const audioElement = new Audio(`./assets/audio/winSong.mp3`);
+    audioElement.volume = .5;
+    audioElement.play();
+    winSeq.forEach((color, seqIdx) => {
+      setTimeout(() => {
+        winRender(color, winSeq, seqIdx);
+      }, 500 * (seqIdx + 1));
+    });
+}
 
+function winRender(color, seq, seqIdx) {
+  lightUp(seq, seqIdx, 300);
 }
