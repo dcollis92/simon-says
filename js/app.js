@@ -92,23 +92,23 @@ function genSequence() {
 
 function lightUp(seq, idx) {
   if (seq[idx] === "green") {
-    document.getElementById("0").style.backgroundColor = "#CCFF66";
+    sequenceArray[0].style.backgroundColor = "#CCFF66";
   } else if (seq[idx] === "red") {
-    document.getElementById("1").style.backgroundColor = "#F05365";
+    sequenceArray[1].style.backgroundColor = "#F05365";
   } else if (seq[idx] === "yellow") {
-    document.getElementById("2").style.backgroundColor = "#F1E8B8";
+    sequenceArray[2].style.backgroundColor = "#F1E8B8";
   } else if (seq[idx] === "blue") {
-    document.getElementById("3").style.backgroundColor = "#8390FA";
+    sequenceArray[3].style.backgroundColor = "#8390FA";
   }
   setTimeout(() => {
     if (seq[idx] === "green") {
-      document.getElementById("0").style.backgroundColor = "darkgreen";
+      sequenceArray[0].style.backgroundColor = "darkgreen";
     } else if (seq[idx] === "red") {
-      document.getElementById("1").style.backgroundColor = "darkred";
+      sequenceArray[1].style.backgroundColor = "darkred";
     } else if (seq[idx] === "yellow") {
-      document.getElementById("2").style.backgroundColor = "goldenrod";
+      sequenceArray[2].style.backgroundColor = "goldenrod";
     } else if (seq[idx] === "blue") {
-      document.getElementById("3").style.backgroundColor = "darkblue";
+      sequenceArray[3].style.backgroundColor = "darkblue";
     }
   }, 400);
 }
