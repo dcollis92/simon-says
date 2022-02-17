@@ -2,9 +2,9 @@
 
 ![Simon Says homepage](https://i.imgur.com/hk1zaGQ.png)
 
-Simon Says (originally titled *Simon*) is a electronic game created by Ralph H. Baer and Howard J. Morrison & distributed/manufactured by Milton Bradley in 1978.[^](https://en.wikipedia.org/wiki/Simon_(game)) 
+Simon Says (originally titled *Simon*) is a electronic game created by Ralph H. Baer and Howard J. Morrison. The game was distributed and manufactured by Milton Bradley in 1978.[^](https://en.wikipedia.org/wiki/Simon_(game)) 
 
-The gameplay is memory based. upon starting the game, Simon Says creates a series of tones and lights, asking the user to recreate the sequence. If succeeding, the sequence increases in length and complexity. 
+The gameplay is memory based. Upon starting the game, Simon Says creates a series of tones and lights, asking the user to recreate the sequence. If succeeding, the sequence increases in length and complexity. 
 
 ---
 
@@ -12,7 +12,7 @@ The gameplay is memory based. upon starting the game, Simon Says creates a serie
 
 ---
 
-## ⚙ Technologies used 
+## ⚙ Technologies Used 
 
 - CSS
 - HTML
