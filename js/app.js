@@ -134,6 +134,7 @@ function playerInput(event) {
     turn = 0;
     isWinner = false;
     startRestartBn.addEventListener("click", init);
+    display = "REPLAY";
     render();
     return;
   } else {
