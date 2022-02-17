@@ -14,7 +14,7 @@ fonts taken from Google Fonts:
 https://fonts.google.com/share?selection.family=Bungee%20Shade%7COxanium:wght@300
 
 Todays goals:
-- Get the reset div to hold space for the button while hidden
+- Get the Start/reset div to KEEP space for the button when unhidden
 - mobile still crashing
 - get message to resize based on screen
-- get entire wrap div to be smaller on the screen for viewability
+- minimize body

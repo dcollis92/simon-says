@@ -49,7 +49,7 @@ function init() {
   turn = -1;
   isWinner = null;
   message = `Ready ${player.name}?`;
-  display = "Play";
+  display = "PLAY";
   resetBtn.classList.add("hidden");
   render();
 }
@@ -85,7 +85,6 @@ function btnRender(color, seq, seqIdx) {
 function genSequence() {
   gameSequence.push(buttons[Math.floor
   (Math.random() * buttons.length)]);
-  // console.log("gs", gameSequence);
 }
 
 function lightUp(seq, idx) {
@@ -112,7 +111,7 @@ function lightUp(seq, idx) {
 }
 
 function compInput() {
-  if (turn !== -1 || level > 5) {
+  if (turn !== -1 || level > 2) {
     return;
   }
   genSequence();
@@ -144,7 +143,6 @@ function playerInput(event) {
   } else {
     message = `Level ${level}! Nice! Keep Going!`;
   }
-  console.log("gs", gameSequence);
   console.log("ps", playerSequence);
   if (playerSequence.length === gameSequence.length) {
     level += 1;
@@ -157,14 +155,14 @@ function playerInput(event) {
 }
 
 function getWinner() {
-  if (level > 5) {
+  if (level > 2) {
     score = level - 1;
-    display = "WINNER";
+    display = " ";
+    resetBtn.classList.remove("hidden");
     isWinner = true;
     message = `${player.name} Won! You beat all ${score} levels! Play Again?`;
     confetti.start(11000);
     playWinSong();
-    resetBtn.classList.remove("hidden");
     render();
   }
 }
