@@ -30,19 +30,17 @@ let level,
 /*------------------ Cached Element References ------------------*/
 sequenceArray = document.querySelectorAll(".btns");
 gameStatus = document.querySelector("#message");
-startButton = document.querySelector("#start-level");
-resetBtn = document.querySelector("#reset-button");
+startRestartBn = document.querySelector("#start-restart");
 
 /*----------------------- Event Listeners -----------------------*/
-startButton.addEventListener("click", compInput);
 sequenceArray.forEach((button) =>
   button.addEventListener("click", playerInput));
-resetBtn.addEventListener("click", init);
 
 /*-------------------------- Functions --------------------------*/
 init();
 
 function init() {
+  startRestartBn.addEventListener("click", compInput);
   gameSequence = [];
   playerSequence = [];
   level = 1;
@@ -50,14 +48,13 @@ function init() {
   isWinner = null;
   message = `Ready ${player.name}?`;
   display = "PLAY";
-  resetBtn.classList.add("hidden");
   render();
 }
 
 function render() {
   setTimeout(() => {
     gameStatus.textContent = message;
-    startButton.textContent = display;
+    startRestartBn.textContent = display;
     display = level;
   }, 450);
 }
@@ -117,6 +114,7 @@ function compInput() {
   genSequence();
   if (level === 1) {
     compRender();
+    startRestartBn.removeEventListener('click', compInput)
   } else {
     setTimeout(() => {
       compRender();
@@ -137,7 +135,7 @@ function playerInput(event) {
     message = "D'oh! Try Again?";
     turn = 0;
     isWinner = false;
-    resetBtn.classList.remove("hidden");
+    startRestartBn.addEventListener('click', init)
     render();
     return;
   } else {
@@ -157,10 +155,10 @@ function playerInput(event) {
 function getWinner() {
   if (level > 2) {
     score = level - 1;
-    display = " ";
-    resetBtn.classList.remove("hidden");
+    display = "REPLAY";
+    startRestartBn.addEventListener('click', init)
     isWinner = true;
-    message = `${player.name} Won! You beat all ${score} levels! Play Again?`;
+    message = `${player.name} Won! Play Again?`;
     confetti.start(11000);
     playWinSong();
     render();

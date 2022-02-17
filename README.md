@@ -13,6 +13,8 @@ confetti.js from https://github.com/SEI-Remote/confetti
 fonts taken from Google Fonts:
 https://fonts.google.com/share?selection.family=Bungee%20Shade%7COxanium:wght@300
 
+
+
 Todays goals:
 - Get the Start/reset div to KEEP space for the button when unhidden
 - mobile still crashing

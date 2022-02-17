@@ -30,7 +30,6 @@ body {
 div.wrap {
   display: flex;
   flex-direction: column;
-  /* border: 4px solid white; */
   text-align: center;
   justify-content: center;
   padding: 30px 60px;
@@ -94,7 +93,7 @@ div.btns {
   grid-column: 4 / 7;
 }
 
-#start-level {
+#start-restart {
   background-color: lightgray;
   color: black;
   grid-column: 3 / 5;
@@ -104,21 +103,7 @@ div.btns {
   font-size: 8vh;
 }
 
-/* .reset-space {
-  display: flex;
-  flex-direction: column;
-  border: 4px solid white;
-  text-align: center;
-  justify-content: center;
-  padding: 20px;
-  height: 5px;
-} */
-
-.hidden {
-  display: none;
-}
-
-#start-level:hover {
+#start-restart:hover {
   background-color: #444444;
   color: #fefefe;
 }
