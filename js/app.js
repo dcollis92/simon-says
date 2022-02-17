@@ -2,22 +2,56 @@
 const player = {
   name: "Human",
   score: 0,
+  // potentially remove score
 };
 
 const buttons = ["green", "red", "yellow", "blue"];
 
 const winSeq = [
-  "green", "red", "blue", "yellow",
-  "green", "red", "blue", "yellow",
-  "green", "red", "blue", "yellow",
-  "green", "red", "blue", "yellow",
-  "green", "red", "blue", "yellow",
-  "green", "red", "blue", "yellow",
-  "green", "red", "blue", "yellow",
-  "green", "red", "blue", "yellow",
-  "green", "red", "blue", "yellow",
-  "green", "red", "blue", "yellow",
-  "green", "red", "blue", "yellow",
+  "green",
+  "red",
+  "blue",
+  "yellow",
+  "green",
+  "red",
+  "blue",
+  "yellow",
+  "green",
+  "red",
+  "blue",
+  "yellow",
+  "green",
+  "red",
+  "blue",
+  "yellow",
+  "green",
+  "red",
+  "blue",
+  "yellow",
+  "green",
+  "red",
+  "blue",
+  "yellow",
+  "green",
+  "red",
+  "blue",
+  "yellow",
+  "green",
+  "red",
+  "blue",
+  "yellow",
+  "green",
+  "red",
+  "blue",
+  "yellow",
+  "green",
+  "red",
+  "blue",
+  "yellow",
+  "green",
+  "red",
+  "blue",
+  "yellow",
 ];
 
 /*-------------------------- Variables --------------------------*/
@@ -26,17 +60,19 @@ let level,
   turn,
   gameSequence,
   playerSequence,
-
-/*------------------ Cached Element References ------------------*/
-sequenceArray = document.querySelectorAll(".btns");
+  /*------------------ Cached Element References ------------------*/
+  sequenceArray = document.querySelectorAll(".btns");
 gameStatus = document.querySelector("#message");
 startRestartBn = document.querySelector("#start-restart");
 
 /*----------------------- Event Listeners -----------------------*/
 sequenceArray.forEach((button) =>
-  button.addEventListener("click", playerInput));
+  button.addEventListener("click", playerInput)
+);
 
 /*-------------------------- Functions --------------------------*/
+// RESET LEVEL TO 10
+
 init();
 
 function init() {
@@ -80,8 +116,7 @@ function btnRender(color, seq, seqIdx) {
 }
 
 function genSequence() {
-  gameSequence.push(buttons[Math.floor
-  (Math.random() * buttons.length)]);
+  gameSequence.push(buttons[Math.floor(Math.random() * buttons.length)]);
 }
 
 function lightUp(seq, idx) {
@@ -114,7 +149,7 @@ function compInput() {
   genSequence();
   if (level === 1) {
     compRender();
-    startRestartBn.removeEventListener('click', compInput)
+    startRestartBn.removeEventListener("click", compInput);
   } else {
     setTimeout(() => {
       compRender();
@@ -135,7 +170,7 @@ function playerInput(event) {
     message = "D'oh! Try Again?";
     turn = 0;
     isWinner = false;
-    startRestartBn.addEventListener('click', init)
+    startRestartBn.addEventListener("click", init);
     render();
     return;
   } else {
@@ -155,8 +190,9 @@ function playerInput(event) {
 function getWinner() {
   if (level > 2) {
     score = level - 1;
+    //potentially remove score
     display = "REPLAY";
-    startRestartBn.addEventListener('click', init)
+    startRestartBn.addEventListener("click", init);
     isWinner = true;
     message = `${player.name} Won! Play Again?`;
     confetti.start(11000);
@@ -167,13 +203,13 @@ function getWinner() {
 
 function playWinSong() {
   const audioElement = new Audio(`./assets/audio/winSong.mp3`);
-    audioElement.volume = .5;
-    audioElement.play();
-    winSeq.forEach((color, seqIdx) => {
-      setTimeout(() => {
-        winRender(color, winSeq, seqIdx);
-      }, 300 * (seqIdx + 1));
-    });
+  audioElement.volume = 0.5;
+  audioElement.play();
+  winSeq.forEach((color, seqIdx) => {
+    setTimeout(() => {
+      winRender(color, winSeq, seqIdx);
+    }, 300 * (seqIdx + 1));
+  });
 }
 
 function winRender(color, seq, seqIdx) {
