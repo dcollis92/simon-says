@@ -1,6 +1,6 @@
 # Simon Says
 
-![An initalized display of Simon Says' homepage](https://i.imgur.com/hk1zaGQ.png)
+![Simon Says homepage](https://i.imgur.com/hk1zaGQ.png)
 
 Simon Says (originally titled *Simon*) is a electronic game created by Ralph H. Baer and Howard J. Morrison & distributed/manufactured by Milton Bradley in 1978.[^](https://en.wikipedia.org/wiki/Simon_(game)) 
 
