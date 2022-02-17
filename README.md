@@ -42,3 +42,4 @@ The gameplay is memory based. upon starting the game, Simon Says creates a serie
 - [ ] Fix Safari/mobile functionality
 - [ ] Accessibility features (keyboard input, colorblind settings)
 - [ ] Animations
+- [ ] Difficulty Options (Easy | Medium | Hard)

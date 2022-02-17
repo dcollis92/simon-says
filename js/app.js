@@ -1,77 +1,41 @@
 /*-------------------------- Constants --------------------------*/
 const player = {
   name: "Human",
-  score: 0,
-  // potentially remove score
 };
 
 const buttons = ["green", "red", "yellow", "blue"];
 
 const winSeq = [
-  "green",
-  "red",
-  "blue",
-  "yellow",
-  "green",
-  "red",
-  "blue",
-  "yellow",
-  "green",
-  "red",
-  "blue",
-  "yellow",
-  "green",
-  "red",
-  "blue",
-  "yellow",
-  "green",
-  "red",
-  "blue",
-  "yellow",
-  "green",
-  "red",
-  "blue",
-  "yellow",
-  "green",
-  "red",
-  "blue",
-  "yellow",
-  "green",
-  "red",
-  "blue",
-  "yellow",
-  "green",
-  "red",
-  "blue",
-  "yellow",
-  "green",
-  "red",
-  "blue",
-  "yellow",
-  "green",
-  "red",
-  "blue",
-  "yellow",
+  "green", "red", "blue", "yellow",
+  "green", "red", "blue", "yellow",
+  "green", "red", "blue", "yellow",
+  "green", "red", "blue", "yellow",
+  "green", "red", "blue", "yellow",
+  "green", "red", "blue", "yellow",
+  "green", "red", "blue", "yellow",
+  "green", "red", "blue", "yellow",
+  "green", "red", "blue", "yellow",
+  "green", "red", "blue", "yellow",
+  "green", "red", "blue", "yellow",
 ];
 
 /*-------------------------- Variables --------------------------*/
 let level,
-  isWinner,
-  turn,
-  gameSequence,
-  playerSequence,
-  /*------------------ Cached Element References ------------------*/
-  sequenceArray = document.querySelectorAll(".btns");
+    isWinner,
+    turn,
+    gameSequence,
+    playerSequence,
+
+/*------------------ Cached Element References ------------------*/
+sequenceArray = document.querySelectorAll(".btns");
 gameStatus = document.querySelector("#message");
 startRestartBn = document.querySelector("#start-restart");
 
 /*----------------------- Event Listeners -----------------------*/
 sequenceArray.forEach((button) =>
-  button.addEventListener("click", playerInput)
-);
+  button.addEventListener("click", playerInput));
 
 /*-------------------------- Functions --------------------------*/
-// RESET LEVEL TO 10
 
 init();
 
@@ -101,7 +65,6 @@ function compRender() {
       btnRender(color, gameSequence, seqIdx);
     }, 500 * (seqIdx + 1));
   });
-  console.log("gs", gameSequence);
 }
 
 function playerRender(color) {
@@ -143,7 +106,7 @@ function lightUp(seq, idx) {
 }
 
 function compInput() {
-  if (turn !== -1 || level > 2) {
+  if (turn !== -1 || level > 10) {
     return;
   }
   genSequence();
@@ -176,7 +139,6 @@ function playerInput(event) {
   } else {
     message = `Level ${level}! Nice! Keep Going!`;
   }
-  console.log("ps", playerSequence);
   if (playerSequence.length === gameSequence.length) {
     level += 1;
     display = level;
@@ -188,9 +150,7 @@ function playerInput(event) {
 }
 
 function getWinner() {
-  if (level > 2) {
-    score = level - 1;
-    //potentially remove score
+  if (level > 10) {
     display = "REPLAY";
     startRestartBn.addEventListener("click", init);
     isWinner = true;
