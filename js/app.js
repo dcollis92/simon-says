@@ -106,7 +106,7 @@ function lightUp(seq, idx) {
 }
 
 function compInput() {
-  if (turn !== -1 || level > 5) {
+  if (turn !== -1 || level > 10) {
     return;
   }
   genSequence();
@@ -151,7 +151,7 @@ function playerInput(event) {
 }
 
 function getWinner() {
-  if (level > 5) {
+  if (level > 10) {
     display = "REPLAY";
     startRestartBn.addEventListener("click", init);
     isWinner = true;
